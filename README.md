@@ -8,7 +8,7 @@ Single HTML file vote system! Don't you see the screenshot?
 ## What?? What???
 Okay... This is the simple vote system using JSON data (hosted on [myjson.com](http://myjson.com)), and the awesome pie chart for visuallization using [D3.js](http://d3js.org).
 
-## No idea! ¯\_(ツ)_/¯
+## No idea! `¯\_(ツ)_/¯`
 Are you dump? OK. Here is the demo: [http://apploy.io/vote.html](http://apploy.io/vote.html)
 
 ## Wow! Is it realtime?
