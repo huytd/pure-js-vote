@@ -164,6 +164,12 @@
                             }
                         }
 
+                        function checkNotExist(url) {
+                            return $scope.data.every(function(e,i,a){
+                                return e.name.replace(/ /g,'').toLowerCase() !== url.replace(/ /g,'').toLowerCase();
+                            })
+                        }
+
                         $scope.keyPressed = function($event) {
                             var keyCode = $event.which || $event.keyCode;
                             if (keyCode === 13) {
@@ -172,17 +178,21 @@
                                 str=str.replace(/<p.*>/gi, "\n");
                                 str=str.replace(/<a.*href="(.*?)".*>(.*?)<\/a>/gi, " $2 (Link->$1) ");
                                 str=str.replace(/<(?:.|\s)*?>/g, "");
-                                var newSite = {
-                                    name: str,
-                                    vote: 1
-                                };
-                                $scope.data.push(newSite);
-                                $http.put(url, {
-                                    title: $scope.voteTitle,
-                                    options: $scope.data
-                                }).then(function() {
-                                    drawChart($scope.data);
-                                });
+                                if (checkNotExist(str)){
+                                    var newSite = {
+                                        name: str,
+                                        vote: 1
+                                    };
+                                    $scope.data.push(newSite);
+                                    $http.put(url, {
+                                        title: $scope.voteTitle,
+                                        options: $scope.data
+                                    }).then(function() {
+                                        drawChart($scope.data);
+                                    });
+                                } else {
+                                    alert("Oops! '" + str + "' is already exist!");
+                                }
                                 $scope.newItem = "";
                             }
                         }
